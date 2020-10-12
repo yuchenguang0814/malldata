@@ -1,16 +1,15 @@
-const {getBanner,} = require("../controller/banner");
+const {getBanner,getRecommand} = require("../controller/banner");
 const multidataRouter = (req)=>{
     const method = req.method;
-    //获取轮播图列表
+    //获取首页数据
     let home_list = {}
     if(method === "GET" && req.path === "/home/multidata"){     
         return getBanner().then(res => {
-            res = JSON.parse(JSON.stringify(res))
-            const imageUrl = [];
-            for (let i=0; i < res.length ; ++i){
-                imageUrl.push(res[i].imageUrl);
-            } 
-            home_list["banner"] =  imageUrl
+            home_list["banner"] =  JSON.parse(JSON.stringify(res))
+            return getRecommand().then(res => {
+                home_list["recommand"] =  JSON.parse(JSON.stringify(res)) 
+            })
+        }).then(res =>{
             return home_list
         })
     }

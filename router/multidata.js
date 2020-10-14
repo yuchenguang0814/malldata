@@ -6,9 +6,6 @@ const multidataRouter = (req)=>{
     if(method === "GET" && req.path === "/home/multidata"){     
         return getBanner().then(res => {
             home_list["banner"] =  JSON.parse(JSON.stringify(res))
-            return getRecommand().then(res => {
-                home_list["recommand"] =  JSON.parse(JSON.stringify(res)) 
-            })
         }).then(res =>{
             return home_list
         })

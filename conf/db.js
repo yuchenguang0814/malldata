@@ -6,7 +6,7 @@ MYSQL_CONF = {
     user: 'root',
     password: "65513723",
     port: '3306',
-    database: 'malldata'
+    database: 'vueprojectdate'
 }
 module.exports = {
     MYSQL_CONF

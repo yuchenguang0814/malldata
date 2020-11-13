@@ -1,6 +1,8 @@
 const express = require('express');
 const path = require('path');
-const multidataRouter = require("./router/multidata");
+const HomeRouter = require("./router/home");
+const PageRouter = require("./router/page");
+const SeoRouter = require("./router/seo");
 
 const app = express();
 app.listen(3000);
@@ -17,7 +19,17 @@ app.use("*", function (req, res, next) {
     }
   })
 app.get("/home/multidata",(req,res)=>{
-    multidataRouter(req).then(suc => {
+  HomeRouter(req).then(suc => {
         res.send({code: 200, message: "Success!", data: suc})
     })
+})
+app.get("/page/multidata",(req,res)=>{
+  PageRouter(req).then(suc => {
+      res.send({code: 200, message: "Success!", data: suc})
+  })
+})
+app.get("/seo/multidata",(req,res)=>{
+  SeoRouter(req).then(suc => {
+      res.send({code: 200, message: "Success!", data: suc})
+  })
 })

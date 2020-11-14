@@ -1,7 +1,7 @@
 const {getSeo} = require("../controller/seo");
 const SeoRouter = (req)=>{
     const method = req.method;
-    //获取页面信息数据
+    //获取页面关键词数据
     let seo_list = {}
     if(method === "GET" && req.path === "/seo/multidata"){     
         return getSeo().then(res => {

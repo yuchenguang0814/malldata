@@ -6,7 +6,23 @@ const getBanner = ()=>{
     //返回的是一个promise
     return exec(sql);
 }
+const getGoodCates = () => {
+    let sql = `SELECT * FROM category INNER JOIN goodcates ON goodcates.pid = category.id`
+    return exec(sql)
+}
+
+const getCase = () => {
+    let sql = `SELECT * FROM cases`
+    return exec(sql)
+}
+const getGoods = () => {
+    let sql = `SELECT * FROM goods`
+    return exec(sql)
+}
 
 module.exports ={
-    getBanner
+    getBanner,
+    getGoodCates,
+    getCase,
+    getGoods
 }

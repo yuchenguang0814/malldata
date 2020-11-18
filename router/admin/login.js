@@ -1,4 +1,3 @@
-const login = require("../../controller/admin/login");
 const {getLogin,getLoginUser} = require("../../controller/admin/login");
 const Login = (req)=>{
     const method = req.method;
@@ -25,9 +24,7 @@ const Login = (req)=>{
                         user.code = 200
                         user.message = '成功'
                         user.data = JSON.parse(JSON.stringify(res))
-                        req.session.token = '张三'
-                        user.session = req.session.token
-                        console.log(user.session)
+                        user.session = Math.random().toString(16)
                         return user
                     }
                 })

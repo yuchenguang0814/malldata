@@ -4,6 +4,7 @@ const HomeRouter = require("./router/home");
 const PageRouter = require("./router/page");
 const SeoRouter = require("./router/seo");
 const Login = require("./router/admin/login");
+const Goods = require("./router/admin/goods");
 
 const app = express();
 const bodyParser = require('body-parser');
@@ -47,5 +48,11 @@ app.get("/seo/multidata",(req,res)=>{
 app.post("/admin/login",(req,res)=>{
   Login(req).then(suc => {
     res.send({code: suc.code, message: suc.message, data: suc.data, session: suc.session})
+  })
+})
+
+app.get("/admin/goods",(req,res)=>{
+  Goods(req).then(suc => {
+    res.send({code:200, message: '成功', data: suc})
   })
 })

@@ -12,7 +12,7 @@ const getGoods = (req)=>{
     }
     console.log(where)
   }
-  let sql = `SELECT * FROM goods Where ${where} ORDER BY sort limit ${offset},${size}`
+  let sql = `SELECT * FROM goods INNER JOIN category ON goods.cid = category.id  Where ${where} ORDER BY sort limit ${offset},${size}`
   console.log(sql)
   return exec(sql);
 }

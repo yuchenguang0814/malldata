@@ -5,17 +5,13 @@ const PageRouter = require("./router/page");
 const SeoRouter = require("./router/seo");
 const Login = require("./router/admin/login");
 const Goods = require("./router/admin/goods");
+const GoodsCates = require("./router/admin/goodsCate");
+const uploadPic = require("./router/api/upload")
 
 const app = express();
 const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
-const session = require('express-session');
-app.use(session({
-    secret: 'keyboard cat',
-    resave: false,
-    saveUninitialized:true
-}));
 app.listen(3000);
 console.log("服务启动");
 app.use('/public/',express.static(path.join(__dirname,'./public/')));
@@ -29,6 +25,10 @@ app.use("*", function (req, res, next) {
       next()
     }
   })
+app.post("/upload",(req,res) => {
+  uploadPic(req, res)
+})
+
 app.get("/home/multidata",(req,res)=>{
   HomeRouter(req).then(suc => {
         res.send({code: 200, message: "Success!", data: suc})
@@ -53,6 +53,11 @@ app.post("/admin/login",(req,res)=>{
 
 app.get("/admin/goods",(req,res)=>{
   Goods(req).then(suc => {
+    res.send({code:200, message: '成功', data: suc})
+  })
+})
+app.get("/admin/goodsCate",(req,res)=>{
+  GoodsCates(req).then(suc => {
     res.send({code:200, message: '成功', data: suc})
   })
 })

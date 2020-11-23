@@ -7,6 +7,8 @@ const Login = require("./router/admin/login");
 const Goods = require("./router/admin/goods");
 const GoodsCates = require("./router/admin/goodsCate");
 const uploadPic = require("./router/api/upload")
+const addGood = require("./router/admin/addGoods")
+const getGood = require("./router/admin/getGoodById")
 
 const app = express();
 const bodyParser = require('body-parser');
@@ -15,6 +17,7 @@ app.use(bodyParser.json());
 app.listen(3000);
 console.log("服务启动");
 app.use('/public/',express.static(path.join(__dirname,'./public/')));
+app.use('/uploads/',express.static(path.join(__dirname,'./uploads/')));
 app.use("*", function (req, res, next) {
     res.header('Access-Control-Allow-Origin', '*');
     res.header("Access-Control-Allow-Headers", "Content-Type,Content-Length, Authorization, Accept,X-Requested-With");
@@ -50,10 +53,19 @@ app.post("/admin/login",(req,res)=>{
     res.send({code: suc.code, message: suc.message, data: suc.data, session: suc.session})
   })
 })
-
+app.post("/admin/goods",(req,res)=>{
+  addGood(req).then(suc => {
+    res.send({code: suc.code, message: suc.message})
+  })
+})
 app.get("/admin/goods",(req,res)=>{
   Goods(req).then(suc => {
     res.send({code:200, message: '成功', data: suc})
+  })
+})
+app.get("/admin/good",(req,res)=>{
+  getGood(req).then(suc => {
+    res.send({code:200, message: '成功', data: suc.good})
   })
 })
 app.get("/admin/goodsCate",(req,res)=>{

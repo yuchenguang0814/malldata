@@ -9,6 +9,8 @@ const GoodsCates = require("./router/admin/goodsCate");
 const uploadPic = require("./router/api/upload")
 const addGood = require("./router/admin/addGoods")
 const getGood = require("./router/admin/getGoodById")
+const editGood = require("./router/admin/editGood")
+const removeGood = require("./router/admin/removeGood")
 
 const app = express();
 const bodyParser = require('body-parser');
@@ -66,6 +68,16 @@ app.get("/admin/goods",(req,res)=>{
 app.get("/admin/good",(req,res)=>{
   getGood(req).then(suc => {
     res.send({code:200, message: '成功', data: suc.good})
+  })
+})
+app.post("/admin/good",(req,res)=>{
+  editGood(req).then(suc => {
+    res.send({code:suc.code, message: suc.message})
+  })
+})
+app.get("/admin/removegood",(req,res)=>{
+  removeGood(req).then(suc => {
+    res.send({code:suc.code, message: suc.message})
   })
 })
 app.get("/admin/goodsCate",(req,res)=>{

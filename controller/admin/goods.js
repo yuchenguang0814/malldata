@@ -29,16 +29,27 @@ const getTotal = (req) => {
   return exec(sql);
 }
 const getGoodsCate = () => {
-  let sql = `SELECT id,pageName FROM category WHERE pageId = 1`
+  let sql = `SELECT cid,pageName FROM category WHERE pageId = 1`
   return exec(sql);
 }
 const getGoodById = (req) => {
   let sql = `SELECT * FROM goods WHERE id = ${req.id}`
   return exec(sql);
 }
+const editGoodById = (req) => {
+  let sql = `UPDATE goods SET c_id = ${req.c_id},image = '${req.pic}',name = '${req.name}',overView = '${req.overView}',advantage = '${req.advantage}',content = '${req.content}',weight = '${req.weight}',dimensions = '${req.dimensions}',pageKey = '${req.pageKey}',pageDescription = '${req.pageDescription}',pageTitle = '${req.pageTitle}',isHome = '${req.isHome}',sort = ${req.sort},add_time = null WHERE id = ${req.id}`
+  return exec(sql);
+}
+const removeGoodById = (req) => {
+  let sql = `DELETE FROM goods WHERE id = ${req}`  
+  return exec(sql);
+}
+
 module.exports ={
   getGoods,
   getTotal,
   getGoodsCate,
-  getGoodById
+  getGoodById,
+  editGoodById,
+  removeGoodById
 }

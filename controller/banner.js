@@ -7,7 +7,7 @@ const getBanner = ()=>{
     return exec(sql);
 }
 const getGoodCates = () => {
-    let sql = `SELECT * FROM category INNER JOIN goodcates ON goodcates.pid = category.id`
+    let sql = `SELECT * FROM category INNER JOIN goodcates ON goodcates.pid = category.cid`
     return exec(sql)
 }
 

@@ -15,7 +15,6 @@ const getGoods = (req)=>{
     let sql = `SELECT * FROM goods INNER JOIN category ON goods.c_id = category.cid  Where ${where} ORDER BY sort limit ${offset},${size}`
     return exec(sql);
   }
-  console.log(obj)
 }
 const getTotal = (req) => {
   let where = '1 = 1'

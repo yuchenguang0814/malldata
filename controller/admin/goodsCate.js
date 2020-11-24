@@ -6,7 +6,7 @@ const getGoodsCate = ()=>{
 }
 
 const addCate = (data)=>{
-  let sql = `insert into goods values (null,'${data.pageId}','${data.pageName}','${data.pagePath}','${data.pageImage}','${data.pageTitleImage}','${data.pageDescription}','${data.pageKey}')`;
+  let sql = `insert into category values (null,'${data.pageId}','${data.pageName}','${data.pagePath}','${data.pageImage}','${data.pageTitleImage}','${data.pageDescription}','${data.pageKey}')`;
   return exec(sql);
 }
 

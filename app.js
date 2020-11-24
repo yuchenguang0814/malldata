@@ -11,6 +11,7 @@ const addGood = require("./router/admin/addGoods")
 const getGood = require("./router/admin/getGoodById")
 const editGood = require("./router/admin/editGood")
 const removeGood = require("./router/admin/removeGood")
+const { AddCate } = require('./router/admin/cates');
 
 const app = express();
 const bodyParser = require('body-parser');
@@ -53,6 +54,11 @@ app.get("/seo/multidata",(req,res)=>{
 app.post("/admin/login",(req,res)=>{
   Login(req).then(suc => {
     res.send({code: suc.code, message: suc.message, data: suc.data, session: suc.session})
+  })
+})
+app.post("/admin/cate",(req,res)=>{
+  AddCate(req).then(suc => {
+    res.send({code: suc.code, message: suc.message})
   })
 })
 app.post("/admin/goods",(req,res)=>{

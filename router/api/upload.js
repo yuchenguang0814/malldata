@@ -4,10 +4,14 @@ const fs = require('fs')
 
 const uploadPic = (req,res) => {
   const form = new multiparty.Form();
-  form.uploadDir = path.join(__dirname,'../../uploads/goodspics');
+  form.uploadDir = ''
+  console.log(req.headers.authorization)
   if (req.headers.authorization == 'goodsCateImage') {
     form.uploadDir = path.join(__dirname,'../../uploads/catespics');
+  } else if (req.headers.authorization == 'goodsImage') {
+    form.uploadDir = path.join(__dirname,'../../uploads/goodspics');
   }
+  console.log(form.uploadDir)
   form.encoding = 'utf-8';
   form.maxFilesSize = 0.5 * 1024 * 1024;
   form.parse(req, function(err, fields, files) {

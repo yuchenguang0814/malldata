@@ -11,7 +11,7 @@ const addGood = require("./router/admin/addGoods")
 const getGood = require("./router/admin/getGoodById")
 const editGood = require("./router/admin/editGood")
 const removeGood = require("./router/admin/removeGood")
-const { AddCate } = require('./router/admin/cates');
+const { AddCate, getCate, EditCate, removeCate} = require('./router/admin/cates');
 
 const app = express();
 const bodyParser = require('body-parser');
@@ -56,9 +56,24 @@ app.post("/admin/login",(req,res)=>{
     res.send({code: suc.code, message: suc.message, data: suc.data, session: suc.session})
   })
 })
+app.get("/admin/cate",(req,res)=>{
+  getCate(req).then(suc => {
+    res.send({code:200, message: '成功', data: suc.cate})
+  })
+})
 app.post("/admin/cate",(req,res)=>{
   AddCate(req).then(suc => {
     res.send({code: suc.code, message: suc.message})
+  })
+})
+app.post("/admin/editcate",(req,res)=>{
+  EditCate(req).then(suc => {
+    res.send({code: suc.code, message: suc.message})
+  })
+})
+app.get("/admin/removecate",(req,res)=>{
+  removeCate(req).then(suc => {
+    res.send({code:suc.code, message: suc.message})
   })
 })
 app.post("/admin/goods",(req,res)=>{

@@ -50,7 +50,11 @@ app.get("/seo/multidata",(req,res)=>{
       res.send({code: 200, message: "Success!", data: suc})
   })
 })
-
+app.get("/admin/page",(req,res)=>{
+  PageRouter(req).then(suc => {
+      res.send({code: 200, message: "Success!", data: suc})
+  })
+})
 app.post("/admin/login",(req,res)=>{
   Login(req).then(suc => {
     res.send({code: suc.code, message: suc.message, data: suc.data, session: suc.session})

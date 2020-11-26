@@ -13,6 +13,16 @@ const PageRouter = (req)=>{
         }).then(res =>{
             return page_list
         })
+    } else if (method === "GET" && req.path === "/admin/page"){
+      return getPage().then(res => {
+        page_list["page"] =  JSON.parse(JSON.stringify(res))
+      }).then(res =>{
+          return getCategory().then(res => {
+            page_list["category"] =  JSON.parse(JSON.stringify(res)) 
+          })
+      }).then(res =>{
+          return page_list
+      })
     }
     
 }

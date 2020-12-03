@@ -1,7 +1,7 @@
 const express = require('express');
 const path = require('path');
 const HomeRouter = require("./router/home");
-const PageRouter = require("./router/page");
+const { PageRouter, getPageById } = require("./router/page");
 const SeoRouter = require("./router/seo");
 const Login = require("./router/admin/login");
 const Goods = require("./router/admin/goods");
@@ -52,6 +52,11 @@ app.get("/seo/multidata",(req,res)=>{
 })
 app.get("/admin/page",(req,res)=>{
   PageRouter(req).then(suc => {
+      res.send({code: 200, message: "Success!", data: suc})
+  })
+})
+app.get("/admin/getpage",(req,res)=>{
+  getPageById(req).then(suc => {
       res.send({code: 200, message: "Success!", data: suc})
   })
 })

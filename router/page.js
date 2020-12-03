@@ -1,4 +1,4 @@
-const {getPage,getCategory} = require("../controller/page");
+const {getPage,getCategory,getPageListId} = require("../controller/page");
 const PageRouter = (req)=>{
     const method = req.method;
     //获取页面信息数据
@@ -24,6 +24,15 @@ const PageRouter = (req)=>{
           return page_list
       })
     }
-    
 }
-module.exports = PageRouter;
+const getPageById = (req)=>{
+  let page_list = {}
+  return getPageListId(req.query).then(res => {
+    page_list = JSON.parse(JSON.stringify(res))
+    return page_list
+  })
+}
+module.exports ={
+    PageRouter,
+    getPageById
+}

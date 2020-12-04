@@ -19,10 +19,20 @@ const getGoods = () => {
     let sql = `SELECT * FROM goods`
     return exec(sql)
 }
+const AddBanners = (req) => {
+    let sql = `insert into banners values (null,'${req}')`
+    return exec(sql)
+}
+const removeBannerById = (req) => {
+    let sql = `DELETE FROM banners WHERE id = ${req}`  
+    return exec(sql);
+}
 
 module.exports ={
     getBanner,
     getGoodCates,
     getCase,
-    getGoods
+    getGoods,
+    AddBanners,
+    removeBannerById
 }

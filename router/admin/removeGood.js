@@ -2,7 +2,6 @@ const {removeGoodById} = require("../../controller/admin/goods");
 
 const removeGood = (req) => {
   const method = req.method;
-  console.log(req.query)
   const suc = []
   if(method === "GET" && req.path === "/admin/removegood"){
     return removeGoodById(req.query.goodsId).then(res => {

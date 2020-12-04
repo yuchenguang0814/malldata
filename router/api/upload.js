@@ -10,6 +10,8 @@ const uploadPic = (req,res) => {
     form.uploadDir = path.join(__dirname,'../../uploads/catespics');
   } else if (req.headers.authorization == 'goodsImage') {
     form.uploadDir = path.join(__dirname,'../../uploads/goodspics');
+  } else if (req.headers.authorization == 'pageBanner'){
+    form.uploadDir = path.join(__dirname,'../../uploads/banner');
   }
   console.log(form.uploadDir)
   form.encoding = 'utf-8';

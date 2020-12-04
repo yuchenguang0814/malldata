@@ -1,4 +1,5 @@
 const {getPage,getCategory,getPageListId} = require("../controller/page");
+const {getBanner, AddBanners, removeBannerById} = require("../controller/banner");
 const PageRouter = (req)=>{
     const method = req.method;
     //获取页面信息数据
@@ -32,7 +33,34 @@ const getPageById = (req)=>{
     return page_list
   })
 }
+const getBannerList = (req)=>{
+  let banner_list = {}
+  return getBanner().then(res => {
+    banner_list = JSON.parse(JSON.stringify(res))
+    return banner_list
+  })
+}
+const addBanner = (req)=>{
+  let suc = []
+  return AddBanners(req.body.img).then(res => {
+    suc['code'] = 200
+    suc['message'] = '添加轮播图成功'
+    return suc;
+  })
+}
+const removeBanner = (req)=>{
+  let suc = []
+  return removeBannerById(req.query.id).then(res => {
+    suc['code'] = 200
+    suc['message'] = '删除轮播图成功'
+    return suc;
+  })
+}
+
 module.exports ={
     PageRouter,
-    getPageById
+    getPageById,
+    getBannerList,
+    addBanner,
+    removeBanner
 }

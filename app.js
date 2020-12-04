@@ -1,7 +1,7 @@
 const express = require('express');
 const path = require('path');
 const HomeRouter = require("./router/home");
-const { PageRouter, getPageById } = require("./router/page");
+const { PageRouter, getPageById, getBannerList, addBanner, removeBanner } = require("./router/page");
 const SeoRouter = require("./router/seo");
 const Login = require("./router/admin/login");
 const Goods = require("./router/admin/goods");
@@ -15,6 +15,7 @@ const { AddCate, getCate, EditCate, removeCate} = require('./router/admin/cates'
 
 const app = express();
 const bodyParser = require('body-parser');
+const { getBanner } = require('./controller/banner');
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
 app.listen(3000);
@@ -58,6 +59,21 @@ app.get("/admin/page",(req,res)=>{
 app.get("/admin/getpage",(req,res)=>{
   getPageById(req).then(suc => {
       res.send({code: 200, message: "Success!", data: suc})
+  })
+})
+app.get("/admin/banner",(req,res)=>{
+  getBannerList(req).then(suc => {
+    res.send({code: 200, message: "Success!", data: suc})
+  })
+})
+app.get("/admin/removebanner",(req,res)=>{
+  removeBanner(req).then(suc => {
+    res.send({code: suc.code, message: suc.message})
+  })
+})
+app.post("/admin/banner",(req,res)=>{
+  addBanner(req).then(suc => {
+    res.send({code: suc.code, message: suc.message})
   })
 })
 app.post("/admin/login",(req,res)=>{

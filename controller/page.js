@@ -20,10 +20,15 @@ const editPageInfoById = (req) => {
   let sql = `UPDATE page SET pageDescription = '${req.pageDescription}',pageImage = '${req.pageImage}',pageKey = '${req.pageKey}' WHERE id = ${req.id}`;
   return exec(sql);
 } 
+const editPageChildInfoById = (req) => {
+  let sql = `UPDATE category SET pageDescription = '${req.pageDescription}',pageImage = '${req.pageImage}',pageKey = '${req.pageKey}' WHERE cid = ${req.cid}`;
+  return exec(sql);
+} 
 module.exports ={
   getPage,
   getCategory,
   getPageListId,
   editPageInfoById,
-  getPageChildListId
+  getPageChildListId,
+  editPageChildInfoById
 }

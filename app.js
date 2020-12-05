@@ -1,7 +1,7 @@
 const express = require('express');
 const path = require('path');
 const HomeRouter = require("./router/home");
-const { PageRouter, getPageById, getBannerList, addBanner, removeBanner, editPageInfo, getPageChildById } = require("./router/page");
+const { PageRouter, getPageById, getBannerList, addBanner, removeBanner, editPageInfo, getPageChildById, editPageChildInfo } = require("./router/page");
 const SeoRouter = require("./router/seo");
 const Login = require("./router/admin/login");
 const Goods = require("./router/admin/goods");
@@ -71,6 +71,11 @@ app.get("/admin/getpagechild",(req,res)=>{
   getPageChildById(req).then(suc => {
       res.send({code: 200, message: "Success!", data: suc})
   })
+})
+app.post("/admin/pagechild",(req,res)=>{
+  editPageChildInfo(req).then(suc => {
+    res.send({code: suc.code, message: suc.message })
+})
 })
 app.get("/admin/banner",(req,res)=>{
   getBannerList(req).then(suc => {

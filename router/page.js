@@ -1,4 +1,4 @@
-const {getPage,getCategory,getPageListId,editPageInfoById,getPageChildListId} = require("../controller/page");
+const {getPage,getCategory,getPageListId,editPageInfoById,getPageChildListId, editPageChildInfoById} = require("../controller/page");
 const {getBanner, AddBanners, removeBannerById} = require("../controller/banner");
 const PageRouter = (req)=>{
     const method = req.method;
@@ -71,6 +71,14 @@ const editPageInfo = (req) => {
     return suc;
   })
 }
+const editPageChildInfo = (req) => {
+  let suc = []
+  return editPageChildInfoById(req.body).then(res => {
+    suc['code'] = 200
+    suc['message'] = '修改页面成功'
+    return suc;
+  })
+}
 
 module.exports ={
     PageRouter,
@@ -79,5 +87,6 @@ module.exports ={
     addBanner,
     removeBanner,
     editPageInfo,
-    getPageChildById
+    getPageChildById,
+    editPageChildInfo
 }

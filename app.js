@@ -1,7 +1,7 @@
 const express = require('express');
 const path = require('path');
 const HomeRouter = require("./router/home");
-const { PageRouter, getPageById, getBannerList, addBanner, removeBanner } = require("./router/page");
+const { PageRouter, getPageById, getBannerList, addBanner, removeBanner, editPageInfo, getPageChildById } = require("./router/page");
 const SeoRouter = require("./router/seo");
 const Login = require("./router/admin/login");
 const Goods = require("./router/admin/goods");
@@ -12,6 +12,7 @@ const getGood = require("./router/admin/getGoodById")
 const editGood = require("./router/admin/editGood")
 const removeGood = require("./router/admin/removeGood")
 const { AddCate, getCate, EditCate, removeCate} = require('./router/admin/cates');
+const EditUser = require("./router/admin/user");
 
 const app = express();
 const bodyParser = require('body-parser');
@@ -56,8 +57,18 @@ app.get("/admin/page",(req,res)=>{
       res.send({code: 200, message: "Success!", data: suc})
   })
 })
+app.post("/admin/page",(req,res)=>{
+  editPageInfo(req).then(suc => {
+      res.send({code: suc.code, message: suc.message })
+  })
+})
 app.get("/admin/getpage",(req,res)=>{
   getPageById(req).then(suc => {
+      res.send({code: 200, message: "Success!", data: suc})
+  })
+})
+app.get("/admin/getpagechild",(req,res)=>{
+  getPageChildById(req).then(suc => {
       res.send({code: 200, message: "Success!", data: suc})
   })
 })
@@ -79,6 +90,11 @@ app.post("/admin/banner",(req,res)=>{
 app.post("/admin/login",(req,res)=>{
   Login(req).then(suc => {
     res.send({code: suc.code, message: suc.message, data: suc.data, session: suc.session})
+  })
+})
+app.post("/admin/user",(req,res)=>{
+  EditUser(req).then(suc => {
+    res.send({code: suc.code, message: suc.message, userInfo: suc})
   })
 })
 app.get("/admin/cate",(req,res)=>{

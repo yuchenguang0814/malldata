@@ -1,4 +1,4 @@
-const {getPage,getCategory,getPageListId} = require("../controller/page");
+const {getPage,getCategory,getPageListId,editPageInfoById,getPageChildListId} = require("../controller/page");
 const {getBanner, AddBanners, removeBannerById} = require("../controller/banner");
 const PageRouter = (req)=>{
     const method = req.method;
@@ -33,6 +33,13 @@ const getPageById = (req)=>{
     return page_list
   })
 }
+const getPageChildById = (req)=>{
+  let page_list = {}
+  return getPageChildListId(req.query).then(res => {
+    page_list = JSON.parse(JSON.stringify(res))
+    return page_list
+  })
+}
 const getBannerList = (req)=>{
   let banner_list = {}
   return getBanner().then(res => {
@@ -56,11 +63,21 @@ const removeBanner = (req)=>{
     return suc;
   })
 }
+const editPageInfo = (req) => {
+  let suc = []
+  return editPageInfoById(req.body).then(res => {
+    suc['code'] = 200
+    suc['message'] = '修改页面成功'
+    return suc;
+  })
+}
 
 module.exports ={
     PageRouter,
     getPageById,
     getBannerList,
     addBanner,
-    removeBanner
+    removeBanner,
+    editPageInfo,
+    getPageChildById
 }

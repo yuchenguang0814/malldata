@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const HomeRouter = require("./router/home");
+const { productbyC } = require("./router/product")
 const { PageRouter, getPageById, getBannerList, addBanner, removeBanner, editPageInfo, getPageChildById, editPageChildInfo } = require("./router/page");
 const SeoRouter = require("./router/seo");
 const Login = require("./router/admin/login");
@@ -51,6 +52,11 @@ app.get("/page/multidata",(req,res)=>{
 app.get("/seo/multidata",(req,res)=>{
   SeoRouter(req).then(suc => {
       res.send({code: 200, message: "Success!", data: suc})
+  })
+})
+app.get("/productbyC", (req,res) => {
+  productbyC(req).then(suc => {
+    res.send({code: 200, message: "Success!", data: suc})
   })
 })
 app.get("/admin/news",(req,res) => {

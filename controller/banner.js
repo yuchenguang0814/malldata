@@ -7,7 +7,7 @@ const getBanner = ()=>{
     return exec(sql);
 }
 const getGoodCates = () => {
-    let sql = `SELECT * FROM category WHERE pageId = 1`
+    let sql = `SELECT * FROM category WHERE pageId = 1 ORDER BY pagePath`
     return exec(sql)
 }
 

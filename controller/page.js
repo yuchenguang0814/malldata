@@ -13,7 +13,7 @@ const getPageChildListId = (req) => {
   return exec(sql);
 }
 const getCategory = () => {
-  let sql = `select * from category`;
+  let sql = `select * from category ORDER BY pagePath`;
   return exec(sql);
 }
 const editPageInfoById = (req) => {
@@ -23,12 +23,17 @@ const editPageInfoById = (req) => {
 const editPageChildInfoById = (req) => {
   let sql = `UPDATE category SET pageDescription = '${req.pageDescription}',pageImage = '${req.pageImage}',pageKey = '${req.pageKey}' WHERE cid = ${req.cid}`;
   return exec(sql);
-} 
+}
+const getUser = (req) => {
+  let sql = `select * from users where user_id = 1`
+  return exec(sql)
+}
 module.exports ={
   getPage,
   getCategory,
   getPageListId,
   editPageInfoById,
   getPageChildListId,
-  editPageChildInfoById
+  editPageChildInfoById,
+  getUser
 }

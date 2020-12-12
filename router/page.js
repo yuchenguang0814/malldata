@@ -1,4 +1,4 @@
-const {getPage,getCategory,getPageListId,editPageInfoById,getPageChildListId, editPageChildInfoById} = require("../controller/page");
+const {getPage,getCategory,getUser,getPageListId,editPageInfoById,getPageChildListId, editPageChildInfoById} = require("../controller/page");
 const {getBanner, AddBanners, removeBannerById} = require("../controller/banner");
 const PageRouter = (req)=>{
     const method = req.method;
@@ -11,6 +11,10 @@ const PageRouter = (req)=>{
             return getCategory().then(res => {
               page_list["category"] =  JSON.parse(JSON.stringify(res)) 
             })
+        }).then(res => {
+          return getUser().then(res => {
+            page_list["user"] =  JSON.parse(JSON.stringify(res)) 
+          })
         }).then(res =>{
             return page_list
         })

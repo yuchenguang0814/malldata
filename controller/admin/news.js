@@ -1,6 +1,5 @@
 const { exec} = require('../../db/mysql');
 const getNewsList = (req) => {
-  console.log(req)
   const page = req.pagenum
   const size = req.pagesize
   const offset = (page-1)*size

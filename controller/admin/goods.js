@@ -28,7 +28,7 @@ const getTotal = (req) => {
   return exec(sql);
 }
 const getGoodsCate = () => {
-  let sql = `SELECT cid,pageName FROM category WHERE pageId = 1`
+  let sql = `SELECT cid,pageName FROM category WHERE pageId = 1 ORDER BY pagePath`
   return exec(sql);
 }
 const getGoodById = (req) => {

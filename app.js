@@ -14,7 +14,7 @@ const editGood = require("./router/admin/editGood")
 const removeGood = require("./router/admin/removeGood")
 const { AddCate, getCate, EditCate, removeCate} = require('./router/admin/cates');
 const EditUser = require("./router/admin/user");
-const { getNews } = require("./router/admin/news");
+const { getNews,addNew, getNewById,editNew } = require("./router/admin/news");
 
 const app = express();
 const bodyParser = require('body-parser');
@@ -72,6 +72,21 @@ app.get("/goods", (req,res) => {
 app.get("/admin/news",(req,res) => {
   getNews(req).then(suc => {
     res.send({code:200, message: '成功', data: suc})
+  })
+})
+app.post("/admin/news",(req,res) => {
+  addNew(req).then(suc => {
+    res.send({code: suc.code, message: suc.message})
+  })
+})
+app.get("/admin/new",(req,res) => {
+  getNewById(req).then(suc => {
+    res.send({code:200, message: '成功', data: suc})
+  })
+})
+app.post("/admin/new",(req,res) => {
+  editNew(req).then(suc => {
+    res.send({code: suc.code, message: suc.message})
   })
 })
 app.get("/admin/page",(req,res)=>{

@@ -1,7 +1,7 @@
 const { exec} = require('../../db/mysql');
 
 const getGoodsCate = ()=>{
-  let sql = `SELECT * FROM category WHERE pageId = 1`
+  let sql = `SELECT * FROM category WHERE pageId = 1 ORDER BY pagePath`
   return exec(sql);
 }
 
@@ -10,7 +10,7 @@ const addCate = (data)=>{
   return exec(sql);
 }
 const getCateById = (req) => {
-  let sql = `SELECT * FROM category WHERE cid = ${req.id}`
+  let sql = `SELECT * FROM category WHERE cid = ${req.id} ORDER BY pagePath`
   return exec(sql);
 }
 const editGoodById = (req) => {

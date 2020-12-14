@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const HomeRouter = require("./router/home");
 const { productbyC,getProductByid, getGoods } = require("./router/product")
+const { getHNews} = require("./router/new")
 const { PageRouter, getPageById, getBannerList, addBanner, removeBanner, editPageInfo, getPageChildById, editPageChildInfo } = require("./router/page");
 const SeoRouter = require("./router/seo");
 const Login = require("./router/admin/login");
@@ -66,6 +67,11 @@ app.get("/product", (req,res) => {
 })
 app.get("/goods", (req,res) => {
   getGoods(req).then(suc => {
+    res.send({code: 200, message: "Success!", data: suc})
+  })
+})
+app.get("/news", (req,res) => {
+  getHNews(req).then(suc => {
     res.send({code: 200, message: "Success!", data: suc})
   })
 })

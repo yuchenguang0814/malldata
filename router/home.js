@@ -1,4 +1,4 @@
-const {getBanner,getGoodCates,getCase,getGoods} = require("../controller/banner");
+const {getBanner,getGoodCates,getCase,getGoods,getNews} = require("../controller/banner");
 const HomeRouter = (req)=>{
     const method = req.method;
     //获取首页数据
@@ -18,6 +18,11 @@ const HomeRouter = (req)=>{
         .then(res => {
             return getGoods().then(res => {
                 home_list["goods"] =  JSON.parse(JSON.stringify(res)) 
+            })
+        })
+        .then(res => {
+            return getNews().then(res => {
+                home_list["news"] =  JSON.parse(JSON.stringify(res)) 
             })
         })
         .then(res =>{

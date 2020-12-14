@@ -16,7 +16,7 @@ const getCase = () => {
     return exec(sql)
 }
 const getGoods = () => {
-    let sql = `SELECT * FROM goods`
+    let sql = `SELECT * FROM goods where isHome = '是'`
     return exec(sql)
 }
 const AddBanners = (req) => {
@@ -27,6 +27,10 @@ const removeBannerById = (req) => {
     let sql = `DELETE FROM banners WHERE id = ${req}`  
     return exec(sql);
 }
+const getNews = (req) => {
+    let sql = `SELECT * FROM news order by createtime DESC`  
+    return exec(sql);
+}
 
 module.exports ={
     getBanner,
@@ -34,5 +38,6 @@ module.exports ={
     getCase,
     getGoods,
     AddBanners,
-    removeBannerById
+    removeBannerById,
+    getNews
 }

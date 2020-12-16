@@ -1,4 +1,4 @@
-const {getAllNew,getNew,getNewById,getPreNew,getNextNew} = require("../controller/new");
+const {getAllNew,getNew,getNewById,getPreNew,getNextNew,getAllVids,getVid} = require("../controller/new");
 const getHNews = (req) => {
   const new_list = {}
   return getAllNew().then(res => {
@@ -31,8 +31,24 @@ const gNewByid = (req) => {
     return new_list
   })
 }
+const getAllVid = (req) => {
+  const vid_list = {}
+  return getAllVids().then(res => {
+    vid_list['vid'] = JSON.parse(JSON.stringify(res))
+    return vid_list
+  })
+}
+const getVidById = (req) => {
+  const vid_list = {}
+  return getVid(req.query).then(res => {
+    vid_list['vid'] = JSON.parse(JSON.stringify(res))
+    return vid_list
+  })
+}
 module.exports ={
   getHNews,
   getHNewByid,
-  gNewByid
+  gNewByid,
+  getAllVid,
+  getVidById
 }

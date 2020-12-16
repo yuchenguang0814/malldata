@@ -19,10 +19,21 @@ const getNextNew = (req) => {
   let sql = `select * from news where id = (select MIN(id) from news where id > ${req.id})`
   return exec(sql)
 }
+const getAllVids = () => {
+  let sql = `SELECT * FROM video`
+  return exec(sql)
+}
+const getVid = (req) => {
+  let sql = `SELECT * FROM video where id =${req.id}`
+  return exec(sql)
+}
+
 module.exports = {
   getAllNew,
   getNew,
   getNewById,
   getPreNew,
-  getNextNew
+  getNextNew,
+  getAllVids,
+  getVid
 }

@@ -1,8 +1,8 @@
 const express = require('express');
 const path = require('path');
 const HomeRouter = require("./router/home");
-const { productbyC,getProductByid, getGoods } = require("./router/product")
-const { getHNews, getHNewByid,gNewByid} = require("./router/new")
+const { productbyC,getProductByid, getGoods} = require("./router/product")
+const { getHNews, getHNewByid,gNewByid,getAllVid,getVidById} = require("./router/new")
 const { PageRouter, getPageById, getBannerList, addBanner, removeBanner, editPageInfo, getPageChildById, editPageChildInfo } = require("./router/page");
 const SeoRouter = require("./router/seo");
 const Login = require("./router/admin/login");
@@ -67,6 +67,16 @@ app.get("/product", (req,res) => {
 })
 app.get("/goods", (req,res) => {
   getGoods(req).then(suc => {
+    res.send({code: 200, message: "Success!", data: suc})
+  })
+})
+app.get("/vid", (req,res) => {
+  getVidById(req).then(suc => {
+    res.send({code: 200, message: "Success!", data: suc})
+  })
+})
+app.get("/vids", (req,res) => {
+  getAllVid(req).then(suc => {
     res.send({code: 200, message: "Success!", data: suc})
   })
 })

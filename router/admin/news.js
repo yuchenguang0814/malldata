@@ -1,4 +1,4 @@
-const { getNewsList, getTotal, addNews, getNew, editNewById}= require("../../controller/admin/news");
+const { getNewsList, getTotal, addNews, getNew, editNewById,removeNewById}= require("../../controller/admin/news");
 const getNews = (req) => {
     const method = req.method;
     let newsList = {}
@@ -56,9 +56,22 @@ const editNew = (req) => {
     })
   }
 }
+const removeNew = (req) => {
+  const method = req.method;
+  console.log(req.query)
+  const suc = []
+  if(method === "GET" && req.path === "/admin/removenew"){
+    return removeNewById(req.query.id).then(res => {
+      suc['code'] = 200
+      suc['message'] = '删除新闻成功'
+      return suc;
+    })
+  }
+}
 module.exports ={
   getNews,
   addNew,
   getNewById,
-  editNew
+  editNew,
+  removeNew
 }

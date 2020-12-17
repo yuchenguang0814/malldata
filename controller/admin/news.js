@@ -37,10 +37,15 @@ const editNewById = (req) => {
   let sql = `UPDATE news SET cid = '${req.cid}',title = '${req.title}',pageKey = '${req.pageKey}',pageDescription = '${req.pageDescription}',author = '${req.author}',content = '${req.content}' WHERE id = ${req.id}`
   return exec(sql);
 }
+const removeNewById = (req) => {
+  let sql = `DELETE FROM news WHERE id = ${req}`  
+  return exec(sql);
+}
 module.exports ={
   getNewsList,
   getTotal,
   addNews,
   getNew,
-  editNewById
+  editNewById,
+  removeNewById
 }

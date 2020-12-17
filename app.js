@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const HomeRouter = require("./router/home");
+const { addQusetion } = require("./router/order")
 const { productbyC,getProductByid, getGoods} = require("./router/product")
 const { getHNews, getHNewByid,gNewByid,getAllVid,getVidById} = require("./router/new")
 const { PageRouter, getPageById, getBannerList, addBanner, removeBanner, editPageInfo, getPageChildById, editPageChildInfo } = require("./router/page");
@@ -39,7 +40,6 @@ app.use("*", function (req, res, next) {
 app.post("/upload",(req,res) => {
   uploadPic(req, res)
 })
-
 app.get("/home/multidata",(req,res)=>{
   HomeRouter(req).then(suc => {
         res.send({code: 200, message: "Success!", data: suc})
@@ -58,6 +58,11 @@ app.get("/seo/multidata",(req,res)=>{
 app.get("/productbyC", (req,res) => {
   productbyC(req).then(suc => {
     res.send({code: 200, message: "Success!", data: suc})
+  })
+})
+app.post("/question",(req,res) => {
+  addQusetion(req).then(suc => {
+    res.send({code: suc.code, message: suc.message})
   })
 })
 app.get("/product", (req,res) => {

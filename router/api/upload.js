@@ -12,6 +12,8 @@ const uploadPic = (req,res) => {
     form.uploadDir = path.join(__dirname,'../../uploads/goodspics');
   } else if (req.headers.authorization == 'pageBanner'){
     form.uploadDir = path.join(__dirname,'../../uploads/banner');
+  } else if (req.headers.authorization == 'newsImage'){
+    form.uploadDir = path.join(__dirname,'../../uploads/newspics');
   }
   console.log(form.uploadDir)
   form.encoding = 'utf-8';

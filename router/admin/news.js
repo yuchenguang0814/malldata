@@ -1,4 +1,4 @@
-const { getNewsList, getTotal, addNews, getNew, editNewById,removeNewById}= require("../../controller/admin/news");
+const { getNewsList, getTotal, addNews, getNew, editNewById,removeNewById,getVideosList,getVTotal,addVideos,removeVidById,getVideo}= require("../../controller/admin/news");
 const getNews = (req) => {
     const method = req.method;
     let newsList = {}
@@ -58,7 +58,6 @@ const editNew = (req) => {
 }
 const removeNew = (req) => {
   const method = req.method;
-  console.log(req.query)
   const suc = []
   if(method === "GET" && req.path === "/admin/removenew"){
     return removeNewById(req.query.id).then(res => {
@@ -68,10 +67,71 @@ const removeNew = (req) => {
     })
   }
 }
+const getVideos = (req) => {
+  const method = req.method;
+  let videosList = {}
+  if(method === "GET" && req.path === "/admin/videos"){
+    return getVideosList(req.query).then(res => {
+      videosList['videos'] = JSON.parse(JSON.stringify(res))
+    })
+    .then(res => {
+      return getVTotal(req.query).then(res => {
+        videosList["total"] = JSON.parse(JSON.stringify(res))
+      })
+    })
+    .then(res => {
+      return videosList;
+    })
+  }
+}
+const addVideo = (req) => {
+  const method = req.method;
+  let addobj = {
+    code:null,
+    message:''
+  }
+  if (method === "POST" && req.path === "/admin/videos") {
+    return addVideos(req.body).then(res => {
+      if(res.length === 0) {
+        addobj.code = 211,
+        addobj.message = '添加失败'
+      } else {
+        addobj.code = 200,
+        addobj.message = '添加成功'
+      }
+      return addobj
+    })
+  }
+}
+const getVideoById = (req) => {
+  const method = req.method;
+  let videoList = {}
+  if(method === "GET" && req.path === "/admin/video"){
+    return getVideo(req.query).then(res => {
+      videoList['video'] = JSON.parse(JSON.stringify(res))
+      return videoList;
+    })
+  }
+}
+const removeVid = (req) => {
+  const method = req.method;
+  const suc = []
+  if(method === "GET" && req.path === "/admin/removevid"){
+    return removeVidById(req.query.id).then(res => {
+      suc['code'] = 200
+      suc['message'] = '删除视频成功'
+      return suc;
+    })
+  }
+}
 module.exports ={
   getNews,
   addNew,
   getNewById,
   editNew,
-  removeNew
+  removeNew,
+  getVideos,
+  addVideo,
+  removeVid,
+  getVideoById
 }

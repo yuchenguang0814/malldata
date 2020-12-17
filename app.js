@@ -16,7 +16,7 @@ const editGood = require("./router/admin/editGood")
 const removeGood = require("./router/admin/removeGood")
 const { AddCate, getCate, EditCate, removeCate} = require('./router/admin/cates');
 const EditUser = require("./router/admin/user");
-const { getNews,addNew, getNewById,editNew,removeNew } = require("./router/admin/news");
+const { getNews,addNew, getNewById,editNew,removeNew,getVideos,addVideo,removeVid,getVideoById } = require("./router/admin/news");
 
 const app = express();
 const bodyParser = require('body-parser');
@@ -100,7 +100,26 @@ app.get("/gnew", (req,res) => {
     res.send({code: 200, message: "Success!", data: suc})
   })
 })
-
+app.get("/admin/videos",(req,res) => {
+  getVideos(req).then(suc => {
+    res.send({code:200, message: '成功', data: suc})
+  })
+})
+app.post("/admin/videos",(req,res) => {
+  addVideo(req).then(suc => {
+    res.send({code: suc.code, message: suc.message})
+  })
+})
+app.get("/admin/video",(req,res) => {
+  getVideoById(req).then(suc => {
+    res.send({code:200, message: '成功', data: suc})
+  })
+})
+app.get("/admin/removevid",(req,res)=>{
+  removeVid(req).then(suc => {
+    res.send({code: suc.code, message: suc.message})
+  })
+})
 app.get("/admin/news",(req,res) => {
   getNews(req).then(suc => {
     res.send({code:200, message: '成功', data: suc})

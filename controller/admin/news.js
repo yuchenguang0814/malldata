@@ -22,7 +22,6 @@ const getTotal = (req) => {
     }
   }
   let sql = `SELECT count(1) as num FROM news  Where ${where}`
-  console.log(sql)
   return exec(sql);
 }
 const addNews = (req) => {
@@ -41,11 +40,46 @@ const removeNewById = (req) => {
   let sql = `DELETE FROM news WHERE id = ${req}`  
   return exec(sql);
 }
+const getVideosList = (req) => {
+  const page = req.pagenum
+  const size = req.pagesize
+  const offset = (page-1)*size
+  let sql = `SELECT * FROM video ORDER BY createtime DESC limit ${offset},${size}`
+  return exec(sql);
+}
+const getVTotal = (req) => {
+  let where = '1 = 1'
+  if(req.query != '') {
+    const obj = JSON.parse(req.query)
+    if(obj.cid) {
+      where = where + ' and news.cid =' + obj.cid
+    }
+  }
+  let sql = `SELECT count(1) as num FROM video`
+  return exec(sql);
+}
+const addVideos = (req) => {
+  let sql = `insert into video values (null,${req.vidurl},'${req.imgurl}','${req.title}','${req.pageKey}','${req.pageDescription}',null)`;
+  return exec(sql);
+}
+const removeVidById = (req) => {
+  let sql = `DELETE FROM video WHERE id = ${req}`  
+  return exec(sql);
+}
+const getVideo = (req) => {
+  let sql = `SELECT * FROM video Where id = ${req.id}`
+  return exec(sql);
+}
 module.exports ={
   getNewsList,
   getTotal,
   addNews,
   getNew,
   editNewById,
-  removeNewById
+  removeNewById,
+  getVideosList,
+  getVTotal,
+  addVideos,
+  removeVidById,
+  getVideo
 }

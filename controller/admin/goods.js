@@ -36,7 +36,7 @@ const getGoodById = (req) => {
   return exec(sql);
 }
 const editGoodById = (req) => {
-  let sql = `UPDATE goods SET c_id = ${req.c_id},image = '${req.pic}',name = '${req.name}',overView = '${req.overView}',advantage = '${req.advantage}',content = '${req.content}',weight = '${req.weight}',dimensions = '${req.dimensions}',pageKey = '${req.pageKey}',pageDescription = '${req.pageDescription}',pageTitle = '${req.pageTitle}',isHome = '${req.isHome}',sort = ${req.sort},add_time = null WHERE id = ${req.id}`
+  let sql = `UPDATE goods SET c_id = ${req.c_id},image = '${req.pic}',name = '${req.name}',overView = '${req.overView}',advantage = '${req.advantage}',content = '${req.content}',weight = '${req.weight}',dimensions = '${req.dimensions}',pageKey = '${req.pageKey}',pageDescription = '${req.pageDescription}',pageTitle = '${req.pageTitle}',isHome = '${req.isHome}',sort = ${req.sort},add_time = null,vidurl = '${req.vidurl}' WHERE id = ${req.id}`
   return exec(sql);
 }
 const removeGoodById = (req) => {

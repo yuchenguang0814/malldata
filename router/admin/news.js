@@ -1,4 +1,4 @@
-const { getNewsList, getTotal, addNews, getNew, editNewById,removeNewById,getVideosList,getVTotal,addVideos,removeVidById,getVideo}= require("../../controller/admin/news");
+const { getNewsList, getTotal, addNews, getNew, editNewById,removeNewById,getVideosList,getVTotal,addVideos,removeVidById,getVideo,editVideoById}= require("../../controller/admin/news");
 const getNews = (req) => {
     const method = req.method;
     let newsList = {}
@@ -113,6 +113,17 @@ const getVideoById = (req) => {
     })
   }
 }
+const editVideo = (req) => {
+  const method = req.method;
+  const suc = []
+  if(method === "POST" && req.path === "/admin/video"){
+    return editVideoById(req.body).then(res => {
+      suc['code'] = 200
+      suc['message'] = '修改新闻成功'
+      return suc;
+    })
+  }
+}
 const removeVid = (req) => {
   const method = req.method;
   const suc = []
@@ -133,5 +144,6 @@ module.exports ={
   getVideos,
   addVideo,
   removeVid,
-  getVideoById
+  getVideoById,
+  editVideo
 }

@@ -70,6 +70,10 @@ const getVideo = (req) => {
   let sql = `SELECT * FROM video Where id = ${req.id}`
   return exec(sql);
 }
+const editVideoById = (req) => {
+  let sql = `UPDATE video SET vidurl = '${req.vidurl}',imgurl = '${req.imgurl}',title = '${req.title}',pageKey = '${req.pageKey}',pageDescription = '${req.pageDescription}' WHERE id = ${req.id}`
+  return exec(sql);
+}
 module.exports ={
   getNewsList,
   getTotal,
@@ -81,5 +85,6 @@ module.exports ={
   getVTotal,
   addVideos,
   removeVidById,
-  getVideo
+  getVideo,
+  editVideoById
 }
